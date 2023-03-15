@@ -71,7 +71,7 @@ export default function Home() {
 
   return (
     <>
-      <main className="bg-cover bg-no-repeat bg-white">
+      <main className="bg-cover min-h-screen bg-no-repeat bg-white">
         <div className=" sm:w-3/5 mx-auto pb-4 px-4 font-bold font-sohne text-black">
           <div className="grid pb-4 mx-auto place-items-center place-content-center">
             <h1 className="text-4xl text-ldblack pt-4 xl:text-6xl 2xl:text-9xl">
