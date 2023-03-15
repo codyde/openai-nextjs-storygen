@@ -9,6 +9,7 @@ export const config = {
   };
 
   const handler = async (req: Request): Promise<Response> => {
+    console.log(req.json())
     const { prompt } = (await req.json()) as {
       prompt?: string;
     };
