@@ -17,7 +17,6 @@ import {
 import { Separator } from "../components/ui/separator";
 
 export default function Home() {
-  const [answer, setAnswer] = useState("");
   const [generatedStory, setGeneratedStory] = useState<string>("");
   const [loading, setLoading] = useState<boolean>();
   const [name, setName] = useState<string>("");
@@ -28,13 +27,12 @@ export default function Home() {
   const [text, setText] = useState<string>("")
 
   useEffect(() => {
-    setText(`Write me a story. Use a tone that is ${tone}. Make it about a ${gender} named ${name}, written for a ${age} year old. The story should talk about becoming more ${feeling}. Keep it safe for children.`)
-    console.log(text)
+    setText(`Write me a story in a tone that is ${tone}. Make it about a ${gender} named ${name}. The story should be about feeling more ${feeling}. Use appropriate language for a ${age} year old.`)
   }, [tone,gender,name,age,feeling])
 
   const handleSubmit = async (e: any) => {
     console.log(e);
-    const prompt = `Write me a story. Use a tone that is ${tone}. Make it about a ${gender} named ${name}, written for a ${age} year old. The story should talk about becoming more ${feeling}. Keep it safe for children.`;
+    const prompt = text;
     e.preventDefault();
     setGeneratedStory("");
     setLoading(true);
@@ -72,7 +70,6 @@ export default function Home() {
     setAge("");
     setFeeling("");
     setTone("");
-    setAnswer("");
     setGeneratedStory("");
   };
 
@@ -96,44 +93,43 @@ export default function Home() {
           <Separator />
 
           <form className="py-3" onSubmit={handleSubmit} method="post">
-            {/* <Input type="prompt" id="prompt" value={answer} onChange={(e) => setAnswer(e.target.value)} placeholder="Prompt" /> */}
             <div className="grid md:grid-cols-2 w-2/3 pb-2 mx-auto place-items-center">
-            <Input className="w-5/6" type="prompt" id="name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Name" />
-              <Input className="w-5/6" type="prompt" id="age" value={age} onChange={(e) => setAge(e.target.value)} placeholder="Age" />
+              <Input className="w-5/6" type="prompt" id="name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Name..." />
+              <Input className="w-5/6" type="prompt" id="age" value={age} onChange={(e) => setAge(e.target.value)} placeholder="Age..." />
               </div>
               <div className="grid md:grid-cols-3 mx-auto place-items-center">
               <Select onValueChange={(e) => setGender(e)} >
                 <SelectTrigger className="w-5/6">
-                  <SelectValue placeholder="Gender" />
+                  <SelectValue placeholder="Gender..." />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="boy">Boy</SelectItem>
                   <SelectItem value="girl">Girl</SelectItem>
-                  <SelectItem value="gender neutral">Neutral</SelectItem>
+                  <SelectItem value="gender non-binary">Non-Binary</SelectItem>
                 </SelectContent>
               </Select>
               <Select onValueChange={(e) => setTone(e)}>
                 <SelectTrigger className="w-5/6">
-                  <SelectValue placeholder="Tone" />
+                  <SelectValue placeholder="Story Tone..." />
                 </SelectTrigger>
                 <SelectContent>
+                  <SelectItem value="adventurous">Adventurous</SelectItem>
                   <SelectItem value="happy">Happy</SelectItem>
-                  <SelectItem value="funny">Funny</SelectItem>
-                  <SelectItem value="sad">Sad</SelectItem>
-                  <SelectItem value="mad">Mad</SelectItem>
-                  <SelectItem value="ridiculous">Ridiculous</SelectItem>
+                  <SelectItem value="sleepy">Sleepy</SelectItem>
+                  <SelectItem value="bored">Bored</SelectItem>
+                  <SelectItem value="curious">Curious</SelectItem>
                 </SelectContent>
               </Select>
               <Select onValueChange={(e) => setFeeling(e)}>
                 <SelectTrigger className="w-5/6">
-                  <SelectValue placeholder="Feeling" />
+                  <SelectValue placeholder="About Feeling..." />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="confident">Confident</SelectItem>
                   <SelectItem value="brave">Brave</SelectItem>
                   <SelectItem value="strong">Strong</SelectItem>
-                  <SelectItem value="shy">Shy</SelectItem>
-                  <SelectItem value="scared">Scared</SelectItem>
+                  <SelectItem value="smart">Smart</SelectItem>
+                  <SelectItem value="kind">Kind</SelectItem>
                 </SelectContent>
               </Select>
             
