@@ -1,5 +1,5 @@
 
-import { useRef, FormEvent, useState } from "react";
+import { useRef, FormEvent, useState, useEffect } from "react";
 import { Input } from "../components/ui/input";
 import { ScrollArea } from "../components/ui/scrollarea";
 import { LineWobble } from "@uiball/loaders";
@@ -25,13 +25,19 @@ export default function Home() {
   const [feeling, setFeeling] = useState<string>("");
   const [age, setAge] = useState<string>("");
   const [tone, setTone] = useState<string>("");
+  const [text, setText] = useState<string>("")
+
+  useEffect(() => {
+    setText(`Write me a story. Use a tone that is ${tone}. Make it about a ${gender} named ${name}, written for a ${age} year old. The story should talk about becoming more ${feeling}. Keep it safe for children.`)
+    console.log(text)
+  }, [tone,gender,name,age,feeling])
 
   const handleSubmit = async (e: any) => {
     console.log(e);
-    const prompt = `write me a ${tone} story about a ${gender} named ${name} who is ${age} years old and becoming more ${feeling}. Keep it safe for children.`;
+    const prompt = `Write me a story. Use a tone that is ${tone}. Make it about a ${gender} named ${name}, written for a ${age} year old. The story should talk about becoming more ${feeling}. Keep it safe for children.`;
     e.preventDefault();
     setGeneratedStory("");
-    // setLoading(true);
+    setLoading(true);
 
     const response = await fetch("/api/generate", {
       method: "POST",
@@ -57,6 +63,7 @@ export default function Home() {
       const chunkValue = decoder.decode(value);
       setGeneratedStory((prev) => prev + chunkValue);
     }
+    setLoading(false)
   };
 
   const handleClear = (e: any) => {
@@ -82,6 +89,9 @@ export default function Home() {
               <span className="text-ldred">NextJS</span>
             </h1>
             <p className="pt-4 text-sm sm:text-lg">Use OpenAI and NextJS to generate short stories for your kids.</p>
+            
+            <p className="place-content-center mx-auto pt-4 pb-2">Generated Prompt:</p> 
+            <pre className="text-ldred">{text}</pre>
           </div>
           <Separator />
 
@@ -92,14 +102,14 @@ export default function Home() {
               <Input className="w-5/6" type="prompt" id="age" value={age} onChange={(e) => setAge(e.target.value)} placeholder="Age" />
               </div>
               <div className="grid md:grid-cols-3 mx-auto place-items-center">
-              <Select onValueChange={(e) => setAnswer(e)} >
+              <Select onValueChange={(e) => setGender(e)} >
                 <SelectTrigger className="w-5/6">
                   <SelectValue placeholder="Gender" />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="boy">Boy</SelectItem>
                   <SelectItem value="girl">Girl</SelectItem>
-                  <SelectItem value="neutral">Neutral</SelectItem>
+                  <SelectItem value="gender neutral">Neutral</SelectItem>
                 </SelectContent>
               </Select>
               <Select onValueChange={(e) => setTone(e)}>
@@ -159,26 +169,11 @@ export default function Home() {
           </form>
           <Separator />
         </div>
-
-        
-
         {generatedStory && (
-          <div className="grid w-4/5 md:w-2/3 mx-auto pb-4 h-3/5 text-black whitespace-pre-line	break-normal">
-            {!loading && (
+          <div className="grid w-4/5 md:w-2/3 mx-auto pb-4 text-black whitespace-pre-line	break-normal">       
               <ScrollArea className="rounded-md border p-4">
                 <pre>{generatedStory}</pre>
               </ScrollArea>
-            )}
-            {loading && (
-              <div className="flex place-items-center place-content-center">
-                <LineWobble
-                  size={100}
-                  speed={1.8}
-                  lineWeight={10}
-                  color="pink"
-                />
-              </div>
-            )}
           </div>
         )}
       </main>
