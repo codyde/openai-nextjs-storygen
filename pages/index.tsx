@@ -1,5 +1,6 @@
 
 import { useRef, FormEvent, useState, useEffect } from "react";
+import Head from 'next/head'
 import { Input } from "../components/ui/input";
 import { ScrollArea } from "../components/ui/scrollarea";
 import { LineWobble } from "@uiball/loaders";
@@ -75,6 +76,10 @@ export default function Home() {
 
   return (
     <>
+      <Head>
+        <title>Write Them a Story</title>
+        <meta property="og:title" content="Write Them a Story" key="title" />
+      </Head>
       <main className="bg-cover min-h-screen bg-no-repeat bg-white">
         <div className=" sm:w-3/5 mx-auto pb-4 px-4 font-bold font-sohne text-black">
           <div className="grid pb-4 mx-auto place-items-center place-content-center">
