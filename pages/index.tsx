@@ -79,6 +79,7 @@ export default function Home() {
       <Head>
         <title>Write Them a Story</title>
         <meta property="og:title" content="Write Them a Story" key="title" />
+        <meta property="og:description" content="Use NextJS and OpenAI to generate a story that inspires and motivates" key="title" />
         <meta property="og:image" content="https://user-images.githubusercontent.com/17350652/225241929-1bbdfae1-7479-4e97-95f9-75382e876093.png" />
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:creator" content='@codydearkland' />
