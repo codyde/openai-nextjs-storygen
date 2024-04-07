@@ -150,7 +150,7 @@ export default function Home() {
               <Input className="px-2 py-2 " type="prompt" id="feeling" value={feeling} onChange={(e) => setFeeling(e.target.value)} placeholder="Feeling" />
               <Input className="px-2 py-2 " type="prompt" id="tone" value={tone} onChange={(e) => setTone(e.target.value)} placeholder="Tone" /> */}
             </div>
-            <div className="grid grid-flow-col">
+            <div className="grid grid-flow-col space-x-4">
               {!loading && (
                 <button
                   className="bg-black rounded-xl text-white font-medium h-10 max-h-10 px-4 py-2 sm:mt-6 mt-4 hover:bg-black/80"
