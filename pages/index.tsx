@@ -43,7 +43,13 @@ export default function Home() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(prompt),
+      body: JSON.stringify({
+        name: name,
+        gender: gender,
+        feeling: feeling,
+        age: age,
+        tone: tone,
+      }),
     });
 
     const result = response.body;
@@ -105,11 +111,11 @@ export default function Home() {
           <Separator />
 
           <form className="py-3" onSubmit={handleSubmit} method="post">
-            <div className="grid md:grid-cols-2 w-2/3 pb-2 mx-auto place-items-center">
+            <div className="grid md:grid-cols-2 w-full xl:w-2/3 pb-2 mx-auto place-items-center space-y-2">
               <Input className="w-5/6" type="prompt" id="name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Name..." />
               <Input className="w-5/6" type="prompt" id="age" value={age} onChange={(e) => setAge(e.target.value)} placeholder="Age..." />
               </div>
-              <div className="grid md:grid-cols-3 mx-auto place-items-center">
+              <div className="grid md:grid-cols-3 mx-auto place-items-center space-y-2">
               <Select onValueChange={(e) => setGender(e)} >
                 <SelectTrigger className="w-5/6">
                   <SelectValue placeholder="Gender..." />
@@ -145,10 +151,6 @@ export default function Home() {
                 </SelectContent>
               </Select>
             
-              
-              {/* <Input className="px-2 py-2" type="prompt" id="gender" value={gender} onChange={(e) => setGender(e.target.value)} placeholder="Gender" />
-              <Input className="px-2 py-2 " type="prompt" id="feeling" value={feeling} onChange={(e) => setFeeling(e.target.value)} placeholder="Feeling" />
-              <Input className="px-2 py-2 " type="prompt" id="tone" value={tone} onChange={(e) => setTone(e.target.value)} placeholder="Tone" /> */}
             </div>
             <div className="grid grid-flow-col space-x-4">
               {!loading && (

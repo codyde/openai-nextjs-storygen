@@ -9,10 +9,10 @@ export const config = {
 };
 
 const handler = async (req: Request): Promise<Response> => {
-  const prompt = await req.json()
+  const { tone, gender, age, name, feeling } = await req.json()
 
+  const prompt = `Write me a story in a tone that is ${tone}. Make it about a ${gender} named ${name}. The story should be about feeling more ${feeling}. Use appropriate language for a ${age} year old.`
   console.log(prompt)
-
   if (!prompt) {
     return new Response("No prompt in the request", { status: 400 });
   }
